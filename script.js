@@ -11,3 +11,19 @@ function showRandomQuote(){
 showRandomQuote()
 newQuote.addEventListener('click',showRandomQuote)
 
+function addQuote(){
+    // console.log(newQuoteText.value,'llk');
+    if(newQuoteText.value.length == 0 || newQuoteCategory.value.length==0){
+        alert('all fiels are required.')
+    }else{
+        arr.push({text : newQuoteText.value, category : newQuoteCategory.value})
+        localStorage.setItem('QUOTE',JSON.stringify(arr))
+        // console.log(arr,'arr');
+        newQuoteText.value = ''
+        newQuoteCategory.value = ''
+    }
+
+}
+function createAddQuoteForm(){
+
+}
