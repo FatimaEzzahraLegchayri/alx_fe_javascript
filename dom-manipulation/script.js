@@ -19,8 +19,8 @@ function addQuote(){
         arr.push({text : newQuoteText.value, category : newQuoteCategory.value})
         localStorage.setItem('QUOTE',JSON.stringify(arr))
         // console.log(arr,'arr');
-        newQuoteText.value = ''
-        newQuoteCategory.value = ''
+        newQuoteText.value.innerHTML = ''
+        newQuoteCategory.value.innerHTML = ''
     }
 
 }
