@@ -3,6 +3,7 @@ const quoteDisplay = document.getElementById('quoteDisplay')
 const newQuoteText = document.getElementById('newQuoteText')
 const newQuoteCategory = document.getElementById('newQuoteCategory')
 
+
 let arr = JSON.parse(localStorage.getItem('QUOTE')) || [] 
 function showRandomQuote(){
     const randomQuote = arr[Math.floor(Math.random()*arr.length)]
@@ -27,3 +28,6 @@ function addQuote(){
 function createAddQuoteForm(){
 
 }
+const li = document.createElement('li')
+li.appendChild(ok)
+// document.addEventListener('click',document.getElementById())
