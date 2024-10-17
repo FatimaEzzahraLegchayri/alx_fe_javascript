@@ -32,7 +32,7 @@ function addQuote(){
 function exportQuotesToJSON(){  
     const a = document.createElement('a')
     const arrTostring = JSON.stringify(arr);
-    const blob = new Blob([arrTostring], {type : 'text/plain'})
+    const blob = new Blob([arrTostring], {type : 'application/json'})
     const url = URL.createObjectURL(blob)
     // console.log('blob',url);
     a.href = url
