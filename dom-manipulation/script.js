@@ -118,6 +118,8 @@ async function dg (){
     await", "https://jsonplaceholder.typicode.com/posts"}
 
     method", "POST", "headers", "Content-Type
+    Quotes synced with server!
+    
 // Simulated server response (JSONPlaceholder mock)
 const serverQuotes = [
     { id: 1, text: 'The only way to do great work is to love what you do.', category: 'motivation' },
