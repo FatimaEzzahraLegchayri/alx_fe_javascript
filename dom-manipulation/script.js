@@ -110,3 +110,93 @@ window.onload = filterQuotes;
 
 
 option
+// ///////////////// api mock ////////////////
+
+ 
+fetchQuotesFromServer
+// Simulated server response (JSONPlaceholder mock)
+const serverQuotes = [
+    { id: 1, text: 'The only way to do great work is to love what you do.', category: 'motivation' },
+    { id: 5, text: 'The best way to predict the future is to create it.', category: 'productivity' }
+];
+
+// Save initial quotes to localStorage if not already saved
+if (!localStorage.getItem('quotes')) {
+    localStorage.setItem('quotes', JSON.stringify(localQuotes));
+}
+
+// Function to fetch quotes from localStorage
+function getLocalQuotes() {
+    return JSON.parse(localStorage.getItem('quotes'));
+}
+
+// Function to filter and display quotes
+function filterQuotes() {
+    const selectedCategory = document.getElementById('categoryFilter').value; // Get selected category
+    const quoteListDiv = document.getElementById('quoteList'); // Get the div where quotes will be displayed
+    const quotes = getLocalQuotes();
+
+    // Clear previous quotes
+    quoteListDiv.innerHTML = '';
+
+    // Filter and display quotes
+    const filteredQuotes = quotes.filter(quote => 
+        selectedCategory === '' || quote.category === selectedCategory
+    );
+
+    filteredQuotes.forEach(quote => {
+        const quoteElement = document.createElement('p');
+        quoteElement.textContent = quote.text;
+        quoteListDiv.appendChild(quoteElement);
+    });
+}
+
+// Initial load: display all quotes
+window.onload = filterQuotes;
+
+// Simulate periodic server fetching (every 10 seconds)
+setInterval(() => {
+    console.log('Checking for new quotes from the server...');
+    checkForNewServerQuotes();
+}, 10000);
+
+// Function to check if there are new quotes from the server
+function checkForNewServerQuotes() {
+    const localData = getLocalQuotes();
+    const serverData = serverQuotes; // In real implementation, this would be fetched from an API
+
+    const hasConflict = serverData.some(serverQuote => 
+        !localData.find(localQuote => localQuote.id === serverQuote.id)
+    );
+
+    if (hasConflict) {
+        document.getElementById('notification').style.display = 'block';
+    }
+}
+
+// Function to sync quotes (resolve conflicts)
+function syncQuotes() {
+    const localData = getLocalQuotes();
+    const serverData = serverQuotes; // Simulating server response
+
+    // Merge data (server data takes precedence)
+    const mergedData = [...localData];
+
+    serverData.forEach(serverQuote => {
+        const existingQuote = mergedData.find(localQuote => localQuote.id === serverQuote.id);
+        if (existingQuote) {
+            // Update existing quote if there's a conflict
+            existingQuote.text = serverQuote.text;
+        } else {
+            // Add new quote from server if it doesn't exist locally
+            mergedData.push(serverQuote);
+        }
+    });
+
+    // Save updated data to localStorage
+    localStorage.setItem('quotes', JSON.stringify(mergedData));
+
+    // Hide notification and refresh quotes list
+    document.getElementById('notification').style.display = 'none';
+    filterQuotes();
+}
