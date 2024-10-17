@@ -65,7 +65,7 @@ const quotes = [
 ];
 
 // Function to filter and display quotes
-function filterQuotes() {
+function filterQuote() {
     const selectedCategory = document.getElementById('categoryFilter').value; // Get selected category
     const quoteListDiv = document.getElementById('quoteList'); // Get the div where quotes will be displayed
 
@@ -73,10 +73,10 @@ function filterQuotes() {
     quoteListDiv.innerHTML = '';
 
     // Filter and display quotes based on selection
-    const filteredQuotes = quotes.filter(quote => 
+    const filteredQuotes = quotes.map(quote => 
         selectedCategory === '' || quote.category === selectedCategory
     );
-
+localStorage.setItem('quote',arr)
     // Display the filtered quotes
     filteredQuotes.forEach(quote => {
         const quoteElement = document.createElement('p');
