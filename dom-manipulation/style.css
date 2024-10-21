@@ -1,0 +1,46 @@
+form{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    width: 30vw;
+    height: 50vh;
+    top: 6em;
+    padding: 1.5em 0;
+    /* background-color: antiquewhite; */
+   
+}
+.quote-container{
+    display: flex;
+    padding: 2em 1em ;
+}
+h1{
+    text-align: center;
+}
+.random{
+    text-align: center;
+
+}
+#quoteDisplay{
+    color: blue;
+    font-size: 1.2em;
+    padding: 0.5em 2em;
+}
+
+button, input[type = 'submit']{
+    background-color: rgb(224, 199, 243);
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+}
+button:hover,input[type = 'submit']:hover{
+    background-color: rgb(214, 174, 243);
+}
+ul{
+    width: 67vw;
+}
+li{
+    list-style: none;
+    padding: 0.2em 0 0.2em 0.6em;
+    background-color: rgba(249, 243, 243, 0.451);
+    margin: 0.3em 0;
+} 
