@@ -43,4 +43,18 @@ li{
     padding: 0.2em 0 0.2em 0.6em;
     background-color: rgba(249, 243, 243, 0.451);
     margin: 0.3em 0;
-} 
+    display: flex;
+    justify-content: space-between;
+}
+li:hover{
+    background-color: rgba(222, 217, 217, 0.451);
+    cursor: pointer;
+}
+#removeBtn{
+    background-color: red;
+    padding: 0.3em 1em;
+    color: aliceblue;
+}
+#removeBtn:hover{
+    background-color: rgb(228, 26, 26);
+}
