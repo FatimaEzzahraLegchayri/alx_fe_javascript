@@ -13,6 +13,10 @@ form{
     display: flex;
     padding: 2em 1em ;
 }
+#categoryFilter{
+    margin-left: 3em ;
+    padding: 0.5em 1em;
+}
 h1{
     text-align: center;
 }

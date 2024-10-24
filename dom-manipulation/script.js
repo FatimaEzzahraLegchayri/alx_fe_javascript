@@ -4,7 +4,7 @@ const newQuoteText = document.getElementById('newQuoteText')
 const newQuoteCategory = document.getElementById('newQuoteCategory')
 const message = document.getElementById('message')
 const addQuote = document.getElementById('addQuote')
-const ul = document.getElementById('quotes')
+const ul = document.querySelector('ul')
 // const removeBtn = document.createElement('button')
 
 
@@ -66,6 +66,7 @@ function display(){
             removeBtn.textContent = 'remove'
             removeBtn.id = 'removeBtn'
             li.textContent = `" ` + e.text + ` "` + ' - '+ e.ctg
+            // console.log('e.text', e)
             ul.appendChild(li)
             li.appendChild(removeBtn)
             removeBtn.addEventListener('click', function(){
@@ -84,10 +85,55 @@ function remove(i,li){
     ul.removeChild(li)
     arr.splice(i,1)
     localStorage.setItem('quoteList',JSON.stringify(arr)) 
-}
-// removeBtn.addEventListener('click',remove)
+} 
 
-// document.getElementById('removeBtn').addEventListener('click',function remove(e,li){
-//     console.log('llllllllllll');
-// li.removeChild(e)
-// })
+function getCategories(){   
+    const categorySelect = document.getElementById('categoryFilter')
+    if(arr.length !== 0){
+
+        arr.forEach((e,index)=>{
+        const option = document.createElement('option')
+        option.textContent = e.ctg
+        option.value = e.ctg
+        categorySelect.appendChild(option)
+        categorySelect.addEventListener('change', function (){
+            const value = categorySelect.value
+            // console.log('categorySelect', categorySelect.value)
+            filterQuotes(value)
+        })
+        
+        })
+        
+    }else{
+        categorySelect.style.display = 'none'
+    }
+     
+}
+document.addEventListener('DOMContentLoaded',getCategories)
+
+function filterQuotes(value){
+    ul.innerHTML = ''
+    const filteredQuotes = arr.filter((e)=>e.ctg === value)
+    console.log('filteredQuotes', filteredQuotes)
+    if(filterQuotes.length > 0){
+        filteredQuotes.forEach(e=>{
+            const li = document.createElement('li')
+            li.textContent = ` ${e.text}  - ${e.ctg}`
+            
+
+            ul.appendChild(li)
+        })
+    } 
+    else{
+        const li = document.createElement('li');
+        li.textContent = 'No quote found in this category.';
+        ul.appendChild(li);
+    }
+}
+
+// document.getElementById('all').addEventListener('click',display)
+
+
+
+
+

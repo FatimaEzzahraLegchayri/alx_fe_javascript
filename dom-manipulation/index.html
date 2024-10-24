@@ -20,7 +20,11 @@
         <!-- <button onclick="addQuote()">Add Quote</button> -->
         <p id="message" ></p>
       </form>
-      <div class="">
+
+      <div class="ctgs">
+        <select id="categoryFilter">
+          <option id="all" value="">All categories</option>
+        </select>
         <ul id="quotes"></ul>
   
       </div>
@@ -32,12 +36,7 @@
           onchange="importFromJsonFile(event)" 
         >
       </div> -->
-      <!-- <select id="categoryFilter" onchange="filterQuotes()">
-        <option  value="">All categories</option>
-        <option  value="classic">Classic</option>
-        <option  value="motivation">Motivation</option>
-        <option  value="productivity">Productivity</option>
-      </select> -->
+      
 
     </body>
     <script src="script.js"></script>
