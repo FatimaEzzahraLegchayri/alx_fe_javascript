@@ -116,8 +116,11 @@ function filterQuotes(value){
     
     ul.innerHTML = ''
     const filteredQuotes = arr.filter((e)=>e.ctg === value)
-    console.log('filteredQuotes', filteredQuotes)
-    if(filterQuotes.length > 0){
+    // console.log('filteredQuotes', filteredQuotes)
+    if(value == ''){
+        display()
+        return
+    }else if(filterQuotes.length > 0){
         filteredQuotes.forEach((quote) =>{
             const li = document.createElement('li')
             li.textContent = ` ${quote.text}  - ${quote.ctg}`
@@ -133,8 +136,7 @@ function filterQuotes(value){
                 filterQuotes(value);
             })
         })
-    } 
-    else{
+    }else{
         const li = document.createElement('li');
         li.textContent = 'No quote found in this category.';
         ul.appendChild(li);
@@ -146,7 +148,31 @@ function removeAfterFilter(index){
     localStorage.setItem('quoteList',JSON.stringify(arr)) 
 }
  
-// document.getElementById('all').addEventListener('click',display)
+
+function exportQuotesToJSON(){  
+    const a = document.createElement('a')
+    const arrTostring = JSON.stringify(arr);
+    const blob = new Blob([arrTostring], {type : 'application/json'})
+    const url = URL.createObjectURL(blob)
+    // console.log('blob',url);
+    a.href = url
+    a.download = 'quotes.json'
+    a.click()
+}
+exportBtn.addEventListener("click", exportQuotesToJSON);
+
+function importFromJsonFile(event) {
+    const fileReader = new FileReader();
+    fileReader.onload = function(event) {
+      const importedQuotes = JSON.parse(event.target.result);
+      arr.push(...importedQuotes);
+    //   saveQuotes();
+    localStorage.setItem('quoteList',JSON.stringify(arr))
+      alert('Quotes imported successfully!');
+    };
+    fileReader.readAsText(event.target.files[0]);
+}
+
 
 
 

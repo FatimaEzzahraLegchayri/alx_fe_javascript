@@ -22,9 +22,15 @@
       </form>
 
       <div class="ctgs">
-        <select id="categoryFilter">
-          <option id="all" value="">All categories</option>
-        </select>
+        <div class="flex">
+          <select id="categoryFilter">
+            <option id="all" value="">All categories</option>
+          </select>
+          <button id="exportBtn">Download quotes</button>
+          <input type="file" name="" id="importFile" accept=".json" 
+          onchange="importFromJsonFile(event)" 
+        >
+        </div>
         <ul id="quotes"></ul>
   
       </div> 
