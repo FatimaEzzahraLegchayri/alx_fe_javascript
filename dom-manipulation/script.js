@@ -60,17 +60,17 @@ function display(){
     (ul.textContent = 'No quote yet. add one!')
     :
     (
-        arr.forEach((e,i)=>{
+        arr.forEach((e,index)=>{
             const li = document.createElement('li')
             const removeBtn = document.createElement('button')
             removeBtn.textContent = 'remove'
-            removeBtn.id = 'removeBtn'
+            removeBtn.classList.add('removeBtn')
             li.textContent = `" ` + e.text + ` "` + ' - '+ e.ctg
             // console.log('e.text', e)
             ul.appendChild(li)
             li.appendChild(removeBtn)
             removeBtn.addEventListener('click', function(){
-                remove(i,li)
+                remove(index,li)
                 generateQuote()   
                 
 
@@ -81,9 +81,9 @@ function display(){
 }
 display()
  
-function remove(i,li){
+function remove(index,li){
     ul.removeChild(li)
-    arr.splice(i,1)
+    arr.splice(index,1)
     localStorage.setItem('quoteList',JSON.stringify(arr)) 
 } 
 
@@ -91,7 +91,7 @@ function getCategories(){
     const categorySelect = document.getElementById('categoryFilter')
     if(arr.length !== 0){
 
-        arr.forEach((e,index)=>{
+        arr.forEach((e)=>{
         const option = document.createElement('option')
         option.textContent = e.ctg
         option.value = e.ctg
@@ -103,6 +103,7 @@ function getCategories(){
         })
         
         })
+
         
     }else{
         categorySelect.style.display = 'none'
@@ -112,16 +113,25 @@ function getCategories(){
 document.addEventListener('DOMContentLoaded',getCategories)
 
 function filterQuotes(value){
+    
     ul.innerHTML = ''
     const filteredQuotes = arr.filter((e)=>e.ctg === value)
     console.log('filteredQuotes', filteredQuotes)
     if(filterQuotes.length > 0){
-        filteredQuotes.forEach(e=>{
+        filteredQuotes.forEach((quote) =>{
             const li = document.createElement('li')
-            li.textContent = ` ${e.text}  - ${e.ctg}`
-            
-
+            li.textContent = ` ${quote.text}  - ${quote.ctg}`
+            const removeBtn = document.createElement('button')
+            removeBtn.classList.add('removeBtn')
+            removeBtn.textContent = 'remove'
+            li.appendChild(removeBtn)
             ul.appendChild(li)
+            li.appendChild(removeBtn)
+            removeBtn.addEventListener('click',function (){
+                const indexInOriginalArray = arr.findIndex(item => item === quote);
+                removeAfterFilter(indexInOriginalArray);
+                filterQuotes(value);
+            })
         })
     } 
     else{
@@ -131,6 +141,11 @@ function filterQuotes(value){
     }
 }
 
+function removeAfterFilter(index){
+    arr.splice(index,1)
+    localStorage.setItem('quoteList',JSON.stringify(arr)) 
+}
+ 
 // document.getElementById('all').addEventListener('click',display)
 
 

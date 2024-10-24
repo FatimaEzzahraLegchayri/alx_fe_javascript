@@ -54,11 +54,11 @@ li:hover{
     background-color: rgba(222, 217, 217, 0.451);
     cursor: pointer;
 }
-#removeBtn{
+.removeBtn{
     background-color: red;
     padding: 0.3em 1em;
     color: aliceblue;
 }
-#removeBtn:hover{
+.removeBtn:hover{
     background-color: rgb(228, 26, 26);
 }
