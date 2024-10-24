@@ -1,49 +1,30 @@
+html week 8 
+
 <!DOCTYPE html>
   <html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Quote Generator</title>
-    <link rel="stylesheet" href="./style.css">
   </head>
   <body>
     <h1>Dynamic Quote Generator</h1>
-    <div class="random">
-      <div id="quoteDisplay"></div>
-      <button id="newQuote">Show New Quote Randomly</button>
-    </div>
-    <div class="quote-container">
-      <form action=""  >
+    <div id="quoteDisplay"></div>
+    <button id="newQuote">Show New Quote</button>
+
+    <div>
         <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
         <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
-        <input type="submit" id="addQuote" >
-        <!-- <button onclick="addQuote()">Add Quote</button> -->
-        <p id="message" ></p>
-      </form>
-
-      <div class="ctgs">
-        <div class="flex">
-          <select id="categoryFilter">
-            <option id="all" value="">All categories</option>
-          </select>
-          <button id="exportBtn">Download quotes</button>
-          <input type="file" name="" id="importFile" accept=".json" 
-          onchange="importFromJsonFile(event)" 
-        >
-        </div>
-        <ul id="quotes"></ul>
-  
-      </div> 
-    </div>
-    
-      <!-- <div>
+        <button onclick="addQuote()">Add Quote</button>
+      <div>
         <button id="exportBtn">Download quotes</button>
         <input type="file" name="" id="importFile" accept=".json" 
           onchange="importFromJsonFile(event)" 
         >
-      </div> -->
-      
-
-    </body>
-    <script src="script.js"></script>
-  </html>
+      </div>
+      <select id="categoryFilter" onchange="filterQuotes()">
+        <option  value="">All categories</option>
+        <option  value="classic">Classic</option>
+        <option  value="motivation">Motivation</option>
+        <option  value="productivity">Productivity</option>
+      </select>
